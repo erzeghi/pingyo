@@ -4,7 +4,7 @@ Application uses [Composer](http://getcomposer.org) to install and update:
 
 ```
 curl -s http://getcomposer.org/installer | php
-php composer.phar require stevangoode/pingyo:1.*
+php composer.phar require papersky/pingyo:1.*
 ```
 
 ## Usage
