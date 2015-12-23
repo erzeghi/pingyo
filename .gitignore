@@ -5,5 +5,7 @@ vendor
 .log
 pingyo-test1.log
 pingyo-test2.log
+test.json
+handtest.php
 .idea
 phpunit.phar

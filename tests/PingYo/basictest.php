@@ -131,8 +131,8 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
         $a->payfrequency = PingYo\PayFrequencyTypes::LastWorkingDayMonth;
         $a->payamount = 100;
         $a->incomepaymenttype = PingYo\IncomePaymentTypes::RegionalDirectDeposit;
-        $a->nextpaydate = "2014-10-01";
-        $a->followingpaydate = "2014-10-01";
+        $a->nextpaydate = "2016-01-31";
+        $a->followingpaydate = "2016-02-05";
         $a->loanamount = 10000;
         $a->nationalidentitynumber = null;
         $a->nationalidentitynumbertype = PingYo\NationalIdentityNumberTypes::NationalInsurance;
@@ -158,6 +158,18 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
         $a->minimumcommissionamount = 0;
         $a->maximumcommissionamount = 0;
         $a->applicationextensions = ["x" => "hello", "y" => "world"];
+
+        $a->usesonlinebanking = false;
+        $a->term = 1;
+
+        $a->transport = 150;
+        $a->food = 200;
+        $a->utilities = 210;
+        $a->confirmedbyapplicant = true;
+        $a->maritalstatus = 2;
+        $a->loanproceeduse = 1;
+        $a->numberofdependents = 1;
+        $a->combinedmonthlyhouseholdincome = 3000;
 
         $r = $a->validate();
         $this->assertTrue($r);
@@ -214,8 +226,8 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
         $a->payfrequency = PingYo\PayFrequencyTypes::LastWorkingDayMonth;
         $a->payamount = 100;
         $a->incomepaymenttype = PingYo\IncomePaymentTypes::RegionalDirectDeposit;
-        $a->nextpaydate = "2014-10-01";
-        $a->followingpaydate = "2014-10-01";
+        $a->nextpaydate = "2016-01-31";
+        $a->followingpaydate = "2016-02-05";
         $a->loanamount = 10000;
         $a->nationalidentitynumber = null;
         $a->nationalidentitynumbertype = PingYo\NationalIdentityNumberTypes::NationalInsurance;
@@ -281,8 +293,8 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
         $a->payfrequency = PingYo\PayFrequencyTypes::LastWorkingDayMonth;
         $a->payamount = 100;
         $a->incomepaymenttype = PingYo\IncomePaymentTypes::RegionalDirectDeposit;
-        $a->nextpaydate = "2014-10-01";
-        $a->followingpaydate = "2014-10-01";
+        $a->nextpaydate = "2016-01-31";
+        $a->followingpaydate = "2016-02-05";
         $a->loanamount = 10000;
         $a->nationalidentitynumber = null;
         $a->nationalidentitynumbertype = PingYo\NationalIdentityNumberTypes::NationalInsurance;
@@ -349,8 +361,8 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
         $a->payfrequency = PingYo\PayFrequencyTypes::LastWorkingDayMonth;
         $a->payamount = 100;
         $a->incomepaymenttype = PingYo\IncomePaymentTypes::RegionalDirectDeposit;
-        $a->nextpaydate = "2014-10-01";
-        $a->followingpaydate = "2014-10-10";
+        $a->nextpaydate = "2016-01-31";
+        $a->followingpaydate = "2016-02-05";
         $a->loanamount = 10000;
         $a->nationalidentitynumber = null;
         $a->nationalidentitynumbertype = PingYo\NationalIdentityNumberTypes::NationalInsurance;
@@ -358,8 +370,8 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
         $a->consenttomarketingemails = true;
         $a->residentialstatus = PingYo\ResidentialStatusTypes::HomeOwner;
 
-        $a->housenumber = "122";
-        $a->housename = null;
+        $a->housenumber = "1";
+        $a->housename = "";
         $a->addressstreet1 = "Test Street";
         $a->addresscity = "Test City";
         $a->addresscountrycode = "GB";
@@ -368,7 +380,7 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
         $a->addresspostcode = "BT602EW";
 
         $a->bankaccountnumber = "12345678";
-        $a->bankcardtype = PingYo\BankCardTypes::VisaDebit;
+        $a->bankcardtype = PingYo\BankCardTypes::Laser;
         $a->bankroutingnumber = "123456";
         $a->monthlymortgagerent = 600;
         $a->monthlycreditcommitments = 100;
@@ -376,6 +388,8 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
         $a->minimumcommissionamount = 0;
         $a->maximumcommissionamount = 0;
         $a->applicationextensions = ["x" => "hello", "y" => "world"];
+
+        $a->usesonlinebanking = false;
 
         $c->setApplicationDetails($a);
 
@@ -420,8 +434,8 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
         $a->payfrequency = PingYo\PayFrequencyTypes::LastWorkingDayMonth;
         $a->payamount = 100;
         $a->incomepaymenttype = PingYo\IncomePaymentTypes::RegionalDirectDeposit;
-        $a->nextpaydate = "2014-10-01";
-        $a->followingpaydate = "2014-10-01";
+        $a->nextpaydate = "2016-01-31";
+        $a->followingpaydate = "2016-02-05";
         $a->loanamount = 10000;
         $a->nationalidentitynumber = null;
         $a->nationalidentitynumbertype = PingYo\NationalIdentityNumberTypes::NationalInsurance;
@@ -448,12 +462,26 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
         $a->maximumcommissionamount = 0;
         $a->applicationextensions = ["x" => "hello", "y" => "world"];
 
+
+        $a->usesonlinebanking = false;
+        $a->term = 1;
+
+        $a->transport = 150;
+        $a->food = 200;
+        $a->utilities = 210;
+        $a->confirmedbyapplicant = true;
+        $a->maritalstatus = 2;
+        $a->loanproceeduse = 1;
+        $a->numberofdependents = 1;
+        $a->combinedmonthlyhouseholdincome = 3000;
+
         $c->setApplicationDetails($a);
 
         $b = new PingYo\SourceDetails();
-        $b->address = 'asd';
-        $b->clientuseragent = 'asd';
-        $b->creationurl = 'http://www.url.com';
+        $b->address = '127.0.0.1';
+        $b->clientuseragent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36';
+        $b->creationurl = 'http://loanmoneytree.co.uk';
+        $b->referringurl = 'http://some-cool-affiliate-site.org';
 
         $c->setSourceDetails($b);
 
@@ -465,6 +493,7 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
 
     public function testApplicationSendPass()
     {
+
         $c = new PingYo\Application();
         $c->affiliateid = 'TEST';
         $c->timeout = 120;
@@ -477,9 +506,9 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
         $a->lastname = "Smith";
         $a->dateofbirth = "1994-09-01";
         $a->email = "johnsmith@domain.com";
-        $a->homephonenumber = "+12345678900";
+        $a->homephonenumber = "0345678900";
         $a->mobilephonenumber = "07123456789";
-        $a->workphonenumber = "+12345678900";
+        $a->workphonenumber = "0345678900";
 
         $a->employername = "Test Corp";
         $a->jobtitle = "Construction Worker";
@@ -489,17 +518,17 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
         $a->payfrequency = PingYo\PayFrequencyTypes::LastWorkingDayMonth;
         $a->payamount = 100;
         $a->incomepaymenttype = PingYo\IncomePaymentTypes::RegionalDirectDeposit;
-        $a->nextpaydate = "2014-10-01";
-        $a->followingpaydate = "2014-10-10";
-        $a->loanamount = 10000;
-        $a->nationalidentitynumber = null;
+        $a->nextpaydate = "2016-01-31";
+        $a->followingpaydate = "2016-02-05";
+        $a->loanamount = 500;
+        $a->nationalidentitynumber = "";
         $a->nationalidentitynumbertype = PingYo\NationalIdentityNumberTypes::NationalInsurance;
         $a->consenttocreditsearch = true;
         $a->consenttomarketingemails = true;
         $a->residentialstatus = PingYo\ResidentialStatusTypes::HomeOwner;
 
-        $a->housenumber = "122";
-        $a->housename = null;
+        $a->housenumber = "1";
+        $a->housename = "";
         $a->addressstreet1 = "Test Street";
         $a->addresscity = "Test City";
         $a->addresscountrycode = "GB";
@@ -508,7 +537,7 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
         $a->addresspostcode = "BT602EW";
 
         $a->bankaccountnumber = "12345678";
-        $a->bankcardtype = PingYo\BankCardTypes::VisaDebit;
+        $a->bankcardtype = PingYo\BankCardTypes::Laser;
         $a->bankroutingnumber = "123456";
         $a->monthlymortgagerent = 600;
         $a->monthlycreditcommitments = 100;
@@ -517,12 +546,26 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
         $a->maximumcommissionamount = 0;
         $a->applicationextensions = ["x" => "hello", "y" => "world"];
 
-        $c->setApplicationDetails($a);
+        $a->usesonlinebanking = false;
+        $a->term = 1;
 
+        $a->transport = 150;
+        $a->food = 200;
+        $a->utilities = 210;
+        $a->confirmedbyapplicant = true;
+        $a->maritalstatus = 2;
+        $a->loanproceeduse = 1;
+        $a->numberofdependents = 1;
+        $a->combinedmonthlyhouseholdincome = 3000;
+
+
+        $c->setApplicationDetails($a);
+        
         $b = new PingYo\SourceDetails();
-        $b->address = 'asd';
-        $b->clientuseragent = 'asd';
-        $b->creationurl = 'http://www.url.com';
+        $b->address = '127.0.0.1';
+        $b->clientuseragent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36';
+        $b->creationurl = 'http://loanmoneytree.co.uk';
+        $b->referringurl = 'http://some-cool-affiliate-site.org';
 
         $c->setSourceDetails($b);
 
@@ -534,6 +577,10 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
 
     public function testApplicationSendPassWaitComplete()
     {
+
+        // $this->assertTrue(true);
+        // return;
+
         $c = new PingYo\Application();
         $c->affiliateid = 'TEST';
         $c->timeout = 120;
@@ -558,8 +605,8 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
         $a->payfrequency = PingYo\PayFrequencyTypes::LastWorkingDayMonth;
         $a->payamount = 100;
         $a->incomepaymenttype = PingYo\IncomePaymentTypes::RegionalDirectDeposit;
-        $a->nextpaydate = "2014-10-01";
-        $a->followingpaydate = "2014-10-10";
+        $a->nextpaydate = "2016-01-31";
+        $a->followingpaydate = "2016-02-05";
         $a->loanamount = 10000;
         $a->nationalidentitynumber = null;
         $a->nationalidentitynumbertype = PingYo\NationalIdentityNumberTypes::NationalInsurance;
@@ -586,12 +633,26 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
         $a->maximumcommissionamount = 0;
         $a->applicationextensions = ["x" => "hello", "y" => "world"];
 
-        $c->setApplicationDetails($a);
+        $a->usesonlinebanking = false;
+        $a->term = 1;
 
+        $a->transport = 150;
+        $a->food = 200;
+        $a->utilities = 210;
+        $a->confirmedbyapplicant = true;
+        $a->maritalstatus = 2;
+        $a->loanproceeduse = 1;
+        $a->numberofdependents = 1;
+        $a->combinedmonthlyhouseholdincome = 3000;
+
+
+        $c->setApplicationDetails($a);
+        
         $b = new PingYo\SourceDetails();
-        $b->address = 'asd';
-        $b->clientuseragent = 'asd';
-        $b->creationurl = 'http://www.url.com';
+        $b->address = '127.0.0.1';
+        $b->clientuseragent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36';
+        $b->creationurl = 'http://loanmoneytree.co.uk';
+        $b->referringurl = 'http://some-cool-affiliate-site.org';
 
         $c->setSourceDetails($b);
 
@@ -601,7 +662,7 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
         if ($t->httpcode == 202) {
             while ($t->percentagecomplete != 100) {
                 $t->refresh();
-                //echo $t->percentagecomplete.'% ('.$t->status.')'."\n";
+                echo $t->percentagecomplete.'% ('.$t->status.')'."\n";
                 sleep(2);
             }
             $final_status = $t->status;
@@ -655,8 +716,8 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
         $a->payfrequency = PingYo\PayFrequencyTypes::LastWorkingDayMonth;
         $a->payamount = 100;
         $a->incomepaymenttype = PingYo\IncomePaymentTypes::RegionalDirectDeposit;
-        $a->nextpaydate = "2014-10-01";
-        $a->followingpaydate = "2014-10-10";
+        $a->nextpaydate = "2016-01-31";
+        $a->followingpaydate = "2016-02-05";
         $a->loanamount = 10000;
         $a->nationalidentitynumber = null;
         $a->nationalidentitynumbertype = PingYo\NationalIdentityNumberTypes::NationalInsurance;
