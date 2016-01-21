@@ -27,6 +27,8 @@ require_once 'PingYo/PayFrequencyType.php';
 require_once 'PingYo/IncomeSourceType.php';
 require_once 'PingYo/EmployerIndustryType.php';
 require_once 'PingYo/NationalIdentityNumberType.php';
+require_once 'PingYo/MaritalStatusType.php';
+require_once 'PingYo/LoanProceedUseType.php';
 
 // Include the composer autoloader
 require_once dirname(__DIR__) . '/vendor/autoload.php';

@@ -4,9 +4,9 @@ namespace PingYo;
 class Application
 {
 
-    public $campaign;
     public $affiliateid;
     public $subaffiliate;
+    public $campaign;
     public $timeout;
     public $testonly;
 
@@ -17,7 +17,7 @@ class Application
 
     private $validation_rules = [
         'required' => [
-            [['affiliateid', 'timeout', 'applicationdetails', 'sourcedetails']]
+            [['affiliateid', 'timeout', 'testonly', 'applicationdetails', 'sourcedetails']]
         ],
         'integer' => [
             [['timeout']]
@@ -175,15 +175,18 @@ class Application
         }
         $r = $this->validate();
         if ($r === true) {
-            return [
-                'Campaign' => $this->campaign,
+            $returnArray = array(
                 'AffiliateId' => $this->affiliateid,
-                'SubAffiliate' => $this->subaffiliate,
                 'Timeout' => $this->timeout,
                 'TestOnly' => $this->testonly,
                 'Application' => $this->applicationdetails->toArray(),
                 'SourceDetails' => $this->sourcedetails->toArray()
-            ];
+            );
+
+            if (isset($this->campaign)) $returnArray['Campaign'] = $this->campaign;
+            if (isset($this->subaffiliate)) $returnArray['SubAffiliate'] = $this->subaffiliate;
+            return $returnArray;
+
         } else {
             return false;
         }

@@ -5,7 +5,7 @@ namespace PingYo;
 class NationalIdentityNumberTypes
 {
 
-    const None = null;
+    const None = 0;
     const NationalInsurance = 1;
 
     public static function validation_set()

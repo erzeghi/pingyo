@@ -14,14 +14,15 @@ class SourceDetails
 
     private $validation_rules = [
         'required' => [
-            [['address', 'clientuseragent', 'creationurl']]
+            [['address', 'clientuseragent', 'creationurl', 'referringurl']]
         ],
         'array' => [
             [['languagecodes']]
         ],
         'url' => [
             [['creationurl', 'referringurl']]
-        ]
+        ],
+        'ip' => [['address']]
     ];
 
     public function attachLogger(\Psr\Log\LoggerInterface $logger = null)
@@ -74,13 +75,14 @@ class SourceDetails
         }
         $r = $this->validate();
         if ($r === true) {
-            return [
+            $returnArray = array(
                 'Address' => $this->address,
                 'ClientUserAgent' => $this->clientuseragent,
                 'CreationUrl' => $this->creationurl,
-                'LanguageCodes' => $this->languagecodes,
                 'ReferringUrl' => $this->referringurl
-            ];
+            );
+            if (isset($this->languagecodes)) $returnArray['LanguageCodes'] = $this->languagecodes;
+            return $returnArray;
         }
     }
 

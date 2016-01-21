@@ -73,11 +73,40 @@ class ExtendedValidator extends \Valitron\Validator {
         }
     }
 
+    protected function validateStart_with_string($field, $value, array $params)
+    {   
+        $begin = $params[0];
+        if ((!is_string($begin))||(!is_string($value))) {
+            return false;
+        }
+        if (strpos($value,$begin)===0) return true;
+        return false;
+    }
+
+    protected function validateOnly_digits($field, $value, array $params)
+    {   
+        if (!is_string($value)) {
+            return false;
+        }
+        if (preg_match('/^[0-9]+$/', $value)) return true;
+        return false;
+    }
+    
+    // Date not on weekend
+    protected function validateNot_on_weekend($field, $value, array $params)
+    {   
+        $date = new \DateTime($value, new \DateTimeZone("UTC"));
+        $weekDay = $date->format('N');
+        return ($weekDay != 6 && $weekDay != 7);
+    }
+
     function __construct($input){
         if(is_callable('parent::__construct')) {
             parent::__construct($input);
         }
     }
+
+
 
     public function validate()
     {

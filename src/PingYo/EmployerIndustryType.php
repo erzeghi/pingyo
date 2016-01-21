@@ -17,6 +17,12 @@ class EmployerIndustryTypes
     const OtherOfficeBased = 10;
     const OtherNotOfficeBased = 11;
     const None = 12;
+    const DrivingDelivery = 13;
+    const AdministrationSecretarial = 14;
+    const MidLevelManagement = 15;
+    const SeniorLevelManagement = 16;
+    const SkilledTrade = 17;
+    const Professional = 18;
 
     public static function validation_set()
     {
@@ -32,7 +38,13 @@ class EmployerIndustryTypes
             self::HotelRestaurantAndLeisure,
             self::OtherOfficeBased,
             self::OtherNotOfficeBased,
-            self::None
+            self::None,
+            self::DrivingDelivery,
+            self::AdministrationSecretarial,
+            self::MidLevelManagement,
+            self::SeniorLevelManagement,
+            self::SkilledTrade,
+            self::Professional
         ];
     }
 }

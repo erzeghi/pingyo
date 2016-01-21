@@ -12,7 +12,6 @@ class ApplicationDetails
     public $homephonenumber;
     public $mobilephonenumber;
     public $workphonenumber;
-
     public $employername;
     public $jobtitle;
     public $employmentstarted;
@@ -29,16 +28,13 @@ class ApplicationDetails
     public $consenttocreditsearch;
     public $consenttomarketingemails;
     public $residentialstatus;
-
     public $housenumber;
     public $housename;
     public $addressstreet1;
     public $addresscity;
-    // public $addresscountrycode;
     public $addresscounty;
     public $addressmovein;
     public $addresspostcode;
-
     public $bankaccountnumber;
     public $bankcardtype;
     public $bankroutingnumber;
@@ -48,12 +44,8 @@ class ApplicationDetails
     public $minimumcommissionamount;
     public $maximumcommissionamount;
     public $applicationextensions;
-
-    
-
     public $usesonlinebanking;
     public $term;
-
     public $transport;
     public $food;
     public $utilities;
@@ -64,10 +56,9 @@ class ApplicationDetails
     public $combinedmonthlyhouseholdincome;
 
 
-
     private $logger = null;
 
-    private $consenttocreditsearch_variants = [false, true];
+    private $boolean_variants = [false, true];
 
     public function attachLogger(\Psr\Log\LoggerInterface $logger = null)
     {
@@ -90,6 +81,9 @@ class ApplicationDetails
         if (!is_null($this->logger)) {
             $this->logger->debug("ApplicationDetails::validate() called");
         }
+
+        if ($this->employername == "") $this->employername = "unemployed";
+
         $validator = new ExtendedValidator(array(
             'title' => $this->title,
             'firstname' => $this->firstname,
@@ -116,10 +110,9 @@ class ApplicationDetails
             'consenttomarketingemails' => $this->consenttomarketingemails,
             'residentialstatus' => $this->residentialstatus,
             'housenumber' => $this->housenumber,
-            'housename' => $this->housename,
+            'housename' => $this->housenam
             'addressstreet1' => $this->addressstreet1,
             'addresscity' => $this->addresscity,
-            // 'addresscountrycode' => $this->addresscountrycode,
             'addresscounty' => $this->addresscounty,
             'addressmovein' => $this->addressmovein,
             'addresspostcode' => $this->addresspostcode,
@@ -144,6 +137,13 @@ class ApplicationDetails
             'combinedmonthlyhouseholdincome' => $this->combinedmonthlyhouseholdincome
         ));
         $validator->rules($this->getValidationRules());
+
+        //custom messages
+        $validator->rule('not_on_weekend', array('nextpaydate', 'followingpaydate'))->message('{field} cannot be Saturday or Sunday');
+        $validator->rule('only_digits', array('mobilephonenumber','homephonenumber','workphonenumber'))->message('{field} should only contain digits 0-9');
+        $startwith = '07';
+        $validator->rule('start_with_string', array('mobilephonenumber'),$startwith)->message('{field} should start with '.$startwith);
+
         if ($validator->validate()) {
             if (!is_null($this->logger)) {
                 $this->logger->info("ApplicationDetails validation passed");
@@ -176,7 +176,6 @@ class ApplicationDetails
                         'mobilephonenumber',
                         'workphonenumber',
                         'employername',
-                        'jobtitle',
                         'employmentstarted',
                         'employerindustry',
                         'incomesource',
@@ -186,12 +185,12 @@ class ApplicationDetails
                         'nextpaydate',
                         'followingpaydate',
                         'loanamount',
+                        'nationalidentitynumbertype',
                         'consenttocreditsearch',
                         'consenttomarketingemails',
                         'residentialstatus',
                         'addressstreet1',
                         'addresscity',
-                        // 'addresscountrycode',
                         'addresscounty',
                         'addressmovein',
                         'addresspostcode',
@@ -201,7 +200,6 @@ class ApplicationDetails
                         'monthlymortgagerent',
                         'monthlycreditcommitments',
                         'otherexpenses',
-                        'usesonlinebanking',
                         'term',
                         'transport',
                         'food',
@@ -210,29 +208,29 @@ class ApplicationDetails
                         'maritalstatus',
                         'loanproceeduse',
                         'numberofdependents',
-                        'combinedmonthlyhouseholdincome',
                     ]
                 ]
-            ],
-            'required_with' => [
-                [['nationalidentitynumbertype'], 'nationalidentitynumber']
             ],
             'required_without' => [
                 [['housenumber'], 'housename'],
                 [['housename'], 'housenumber']
             ],
             'required_if' => [
-                [['nationalidentitynumber'], ['bankcardtype', ['None', 'Unknown']]]
+                // [['nationalidentitynumber'], ['bankcardtype', ['None', 'Unknown']]],
+                [['combinedmonthlyhouseholdincome'], ['maritalstatus', [MaritalStatusTypes::Married]]]
             ],
             'email' => [
                 [['email']]
             ],
-            // 'phone' => [
-                // [['homephonenumber', 'mobilephonenumber', 'workphonenumber'], 'addresscountrycode']
-            // ],
+            'length' => [
+                [['mobilephonenumber'],11]
+            ],
+            'lengthBetween' => [
+                [['homephonenumber','workphonenumber'],10,11]
+            ],
             'lengthMin' => [
                 [['firstname', 'lastname'], 2],
-                [['employername'], 1]
+                [['employername'], 1],
             ],
             'alpha' => [
                 [['firstname', 'lastname']]
@@ -241,10 +239,12 @@ class ApplicationDetails
                 [['dateofbirth', 'employmentstarted', 'nextpaydate', 'followingpaydate', 'addressmovein']]
             ],
             'dateAfter' => [
-                [['nextpaydate', 'followingpaydate'], $this->getTodayDate()],
+                [['nextpaydate'], $this->getTodayDate()],
+                [['followingpaydate'], $this->getNextPAYDATE()],
             ],
             'dateBefore' => [
-                [['nextpaydate', 'followingpaydate'], $this->getValidPAYDATE()],
+                [['nextpaydate'], $this->getValidPAYDATE()],
+                [['followingpaydate'], $this->getValidFollowingPAYDATE()],
                 [['dateofbirth'], $this->getValidDOB()]
             ],
             'in' => [
@@ -255,257 +255,13 @@ class ApplicationDetails
                 [['incomepaymenttype'], IncomePaymentTypes::validation_set()],
                 [['nationalidentitynumbertype'], NationalIdentityNumberTypes::validation_set()],
                 [['residentialstatus'], ResidentialStatusTypes::validation_set()],
-                [['consenttocreditsearch', 'consenttomarketingemails'], $this->consenttocreditsearch_variants],
+                [['consenttocreditsearch', 'consenttomarketingemails', 'confirmedbyapplicant','usesonlinebanking'], $this->boolean_variants],
                 [['bankcardtype'], BankCardTypes::validation_set()],
-                // [
-                //     ['addresscountrycode'],
-                //     [
-                //         'AF',
-                //         'AD',
-                //         'AE',
-                //         'AG',
-                //         'AI',
-                //         'AL',
-                //         'AM',
-                //         'AN',
-                //         'AO',
-                //         'AQ',
-                //         'AR',
-                //         'AS',
-                //         'AT',
-                //         'AU',
-                //         'AW',
-                //         'AZ',
-                //         'BA',
-                //         'BB',
-                //         'BD',
-                //         'BE',
-                //         'BF',
-                //         'BG',
-                //         'BH',
-                //         'BI',
-                //         'BJ',
-                //         'BM',
-                //         'BN',
-                //         'BO',
-                //         'BR',
-                //         'BS',
-                //         'BT',
-                //         'BV',
-                //         'BW',
-                //         'BY',
-                //         'BZ',
-                //         'CA',
-                //         'CC',
-                //         'CD',
-                //         'CF',
-                //         'CG',
-                //         'CH',
-                //         'CI',
-                //         'CK',
-                //         'CL',
-                //         'CM',
-                //         'CN',
-                //         'CO',
-                //         'CR',
-                //         'CU',
-                //         'CV',
-                //         'CX',
-                //         'CY',
-                //         'CZ',
-                //         'DE',
-                //         'DJ',
-                //         'DK',
-                //         'DM',
-                //         'DO',
-                //         'DZ',
-                //         'EC',
-                //         'EE',
-                //         'EG',
-                //         'EH',
-                //         'ER',
-                //         'ES',
-                //         'ET',
-                //         'FI',
-                //         'FJ',
-                //         'FK',
-                //         'FM',
-                //         'FO',
-                //         'FR',
-                //         'FX',
-                //         'GA',
-                //         'GB',
-                //         'GD',
-                //         'GE',
-                //         'GF',
-                //         'GH',
-                //         'GI',
-                //         'GL',
-                //         'GM',
-                //         'GN',
-                //         'GP',
-                //         'GQ',
-                //         'GR',
-                //         'GS',
-                //         'GT',
-                //         'GU',
-                //         'GW',
-                //         'GY',
-                //         'HK',
-                //         'HM',
-                //         'HN',
-                //         'HR',
-                //         'HT',
-                //         'HU',
-                //         'ID',
-                //         'IE',
-                //         'IL',
-                //         'IN',
-                //         'IO',
-                //         'IQ',
-                //         'IR',
-                //         'IS',
-                //         'IT',
-                //         'JM',
-                //         'JO',
-                //         'JP',
-                //         'KE',
-                //         'KG',
-                //         'KH',
-                //         'KI',
-                //         'KM',
-                //         'KN',
-                //         'KP',
-                //         'KR',
-                //         'KW',
-                //         'KY',
-                //         'KZ',
-                //         'LA',
-                //         'LB',
-                //         'LC',
-                //         'LI',
-                //         'LK',
-                //         'LR',
-                //         'LS',
-                //         'LT',
-                //         'LU',
-                //         'LV',
-                //         'LY',
-                //         'MA',
-                //         'MC',
-                //         'MD',
-                //         'ME',
-                //         'MG',
-                //         'MH',
-                //         'MK',
-                //         'ML',
-                //         'MM',
-                //         'MN',
-                //         'MO',
-                //         'MP',
-                //         'MQ',
-                //         'MR',
-                //         'MS',
-                //         'MT',
-                //         'MU',
-                //         'MV',
-                //         'MW',
-                //         'MX',
-                //         'MY',
-                //         'MZ',
-                //         'NA',
-                //         'NC',
-                //         'NE',
-                //         'NF',
-                //         'NG',
-                //         'NI',
-                //         'NL',
-                //         'NO',
-                //         'NP',
-                //         'NR',
-                //         'NU',
-                //         'NZ',
-                //         'OM',
-                //         'PA',
-                //         'PE',
-                //         'PF',
-                //         'PG',
-                //         'PH',
-                //         'PK',
-                //         'PL',
-                //         'PM',
-                //         'PN',
-                //         'PR',
-                //         'PT',
-                //         'PW',
-                //         'PY',
-                //         'QA',
-                //         'RE',
-                //         'RO',
-                //         'RS',
-                //         'RU',
-                //         'RW',
-                //         'SA',
-                //         'SB',
-                //         'SC',
-                //         'SD',
-                //         'SE',
-                //         'SG',
-                //         'SH',
-                //         'SI',
-                //         'SJ',
-                //         'SK',
-                //         'SL',
-                //         'SM',
-                //         'SN',
-                //         'SO',
-                //         'SR',
-                //         'SS',
-                //         'ST',
-                //         'SV',
-                //         'SY',
-                //         'SZ',
-                //         'TC',
-                //         'TD',
-                //         'TF',
-                //         'TG',
-                //         'TH',
-                //         'TJ',
-                //         'TK',
-                //         'TM',
-                //         'TN',
-                //         'TO',
-                //         'TP',
-                //         'TR',
-                //         'TT',
-                //         'TV',
-                //         'TW',
-                //         'TZ',
-                //         'UA',
-                //         'UG',
-                //         'UM',
-                //         'US',
-                //         'UY',
-                //         'UZ',
-                //         'VA',
-                //         'VC',
-                //         'VE',
-                //         'VG',
-                //         'VI',
-                //         'VN',
-                //         'VU',
-                //         'WF',
-                //         'WS',
-                //         'YE',
-                //         'YT',
-                //         'ZA',
-                //         'ZM',
-                //         'ZW'
-                //     ]
-                // ]
+                [['maritalstatus'], MaritalStatusTypes::validation_set()],
+                [['loanproceeduse'], LoanProceedUseTypes::validation_set()],
             ],
             'integer' => [
-                [['payamount,loanamount']]
+                [['payamount','loanamount','term','numberofdependents']]
             ],
             'min' => [
                 [['payamount'], 0]
@@ -520,9 +276,15 @@ class ApplicationDetails
                         'monthlycreditcommitments',
                         'otherexpenses',
                         'minimumcommissionamount',
-                        'maximumcommissionamount'
+                        'maximumcommissionamount',
+                        'transport',
+                        'food',
+                        'utilities'
                     ]
                 ]
+            ],
+            'array' => [
+                [['applicationextensions']]
             ]
         ];
     }
@@ -536,12 +298,31 @@ class ApplicationDetails
         return $date;
     }
 
+    private function getNextPAYDATE()
+    {
+        if (!is_null($this->logger)) {
+            $this->logger->debug("ApplicationDetails::getNextPAYDATE() called");
+        }
+        $date = new \DateTime($this->nextpaydate, new \DateTimeZone("UTC"));
+        return $date;
+    }
+
     private function getValidPAYDATE()
     {
         if (!is_null($this->logger)) {
             $this->logger->debug("ApplicationDetails::getValidPAYDATE() called");
         }
         $date = new \DateTime("now", new \DateTimeZone("UTC"));
+        $date->add(date_interval_create_from_date_string('45 days'));
+        return $date;
+    }
+
+    private function getValidFollowingPAYDATE()
+    {
+        if (!is_null($this->logger)) {
+            $this->logger->debug("ApplicationDetails::getFollowingPAYDATE() called");
+        }
+        $date = new \DateTime($this->nextpaydate, new \DateTimeZone("UTC"));
         $date->add(date_interval_create_from_date_string('45 days'));
         return $date;
     }
@@ -563,20 +344,16 @@ class ApplicationDetails
         }
         $r = $this->validate();
         if ($r === true) {
-            return [
+            $returnArray = array(
                 'Title' => $this->title,
                 'FirstName' => $this->firstname,
                 'LastName' => $this->lastname,
                 'DateOfBirth' => $this->strDateToJsonDate($this->dateofbirth),
                 'Email' => $this->email,
-                // 'HomePhoneNumber' => $this->NormalizePhone($this->homephonenumber, $this->addresscountrycode),
-                // 'MobilePhoneNumber' => $this->NormalizePhone($this->mobilephonenumber, $this->addresscountrycode),
-                // 'WorkPhoneNumber' => $this->NormalizePhone($this->workphonenumber, $this->addresscountrycode),
                 'HomePhoneNumber' => $this->homephonenumber,
                 'MobilePhoneNumber' => $this->mobilephonenumber,
                 'WorkPhoneNumber' => $this->workphonenumber,
                 'EmployerName' => $this->employername,
-                'JobTitle' => $this->jobtitle,
                 'EmploymentStarted' => $this->strDateToJsonDate($this->employmentstarted),
                 'EmployerIndustry' => $this->employerindustry,
                 'IncomeSource' => $this->incomesource,
@@ -586,7 +363,6 @@ class ApplicationDetails
                 'NextPayDate' => $this->strDateToJsonDate($this->nextpaydate),
                 'FollowingPayDate' => $this->strDateToJsonDate($this->followingpaydate),
                 'LoanAmount' => $this->loanamount,
-                'NationalIdentityNumber' => $this->nationalidentitynumber,
                 'NationalIdentityNumberType' => $this->nationalidentitynumbertype,
                 'ConsentToCreditSearch' => $this->consenttocreditsearch,
                 'ConsentToMarketingEmails' => $this->consenttomarketingemails,
@@ -595,7 +371,6 @@ class ApplicationDetails
                 'HouseName' => $this->housename,
                 'AddressStreet1' => $this->addressstreet1,
                 'AddressCity' => $this->addresscity,
-                // 'AddressCountryCode' => $this->addresscountrycode,
                 'AddressCounty' => $this->addresscounty,
                 'AddressMoveIn' => $this->strDateToJsonDate($this->addressmovein),
                 'AddressPostcode' => $this->addresspostcode,
@@ -605,12 +380,6 @@ class ApplicationDetails
                 'MonthlyMortgageRent' => $this->monthlymortgagerent,
                 'MonthlyCreditCommitments' => $this->monthlycreditcommitments,
                 'OtherExpenses' => $this->otherexpenses,
-                'MinimumCommissionAmount' => $this->minimumcommissionamount,
-                'MaximumCommissionAmount' => $this->maximumcommissionamount,
-                'ApplicationExtensions' => $this->applicationextensions,
-                // "LoanAmountCurrencyCode" => null,
-                // "PayAmountCurrencyCode" => null,
-                'UsesOnlineBanking' => $this->usesonlinebanking,
                 'Term' => $this->term,
                 'Transport' => $this->transport,
                 'Food' => $this->food,
@@ -620,8 +389,17 @@ class ApplicationDetails
                 'LoanProceedUse' => $this->loanproceeduse,
                 'NumberOfDependents' => $this->numberofdependents,
                 'CombinedMonthlyHouseholdIncome' => $this->combinedmonthlyhouseholdincome
+            );
+            
+            //nonrequired fields
+            if (isset($this->jobtitle)) $returnArray['JobTitle'] = $this->jobtitle; 
+            if (isset($this->nationalidentitynumber)) $returnArray['NationalIdentityNumber'] = $this->nationalidentitynumber; 
+            if (isset($this->usesonlinebanking)) $returnArray['UsesOnlineBanking'] = $this->usesonlinebanking; 
+            if (isset($this->minimumcommissionamount)) $returnArray['MinimumCommissionAmount'] = $this->minimumcommissionamount; 
+            if (isset($this->maximumcommissionamount)) $returnArray['MaximumCommissionAmount'] = $this->maximumcommissionamount; 
+            if (isset($this->applicationextensions)) $returnArray['ApplicationExtensions'] = $this->applicationextensions; 
 
-            ];
+            return $returnArray;
         }
     }
 
