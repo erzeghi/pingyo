@@ -110,7 +110,7 @@ class ApplicationDetails
             'consenttomarketingemails' => $this->consenttomarketingemails,
             'residentialstatus' => $this->residentialstatus,
             'housenumber' => $this->housenumber,
-            'housename' => $this->housenam
+            'housename' => $this->housename,
             'addressstreet1' => $this->addressstreet1,
             'addresscity' => $this->addresscity,
             'addresscounty' => $this->addresscounty,
