@@ -2,7 +2,7 @@
 
 namespace PingYo;
 
-class IncomeSourceTypes
+class IncomeSourceType
 {
 
     const SelfEmployed = 1;

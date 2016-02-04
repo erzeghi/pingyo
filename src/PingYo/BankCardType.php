@@ -2,7 +2,7 @@
 
 namespace PingYo;
 
-class BankCardTypes
+class BankCardType
 {
 
     // const AmericanExpress = 1;

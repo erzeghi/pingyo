@@ -2,7 +2,7 @@
 
 namespace PingYo;
 
-class TitleTypes
+class TitleType
 {
     const Mr = 1;
     const Mrs = 2;

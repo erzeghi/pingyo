@@ -2,7 +2,7 @@
 
 namespace PingYo;
 
-class PayFrequencyTypes
+class PayFrequencyType
 {
 
     const Weekly = 1;

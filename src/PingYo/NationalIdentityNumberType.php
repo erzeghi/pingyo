@@ -2,7 +2,7 @@
 
 namespace PingYo;
 
-class NationalIdentityNumberTypes
+class NationalIdentityNumberType
 {
 
     const None = 0;

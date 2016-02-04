@@ -66,10 +66,10 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
     
     public function testConstantValidation()
     {
-        $input = array('foo' => PingYo\TitleTypes::Mr);
+        $input = array('foo' => PingYo\TitleType::Mr);
         $validator = new PingYo\ExtendedValidator($input);
         $validator->rule('required', 'foo');
-        $validator->rule('in', 'foo', PingYo\TitleTypes::validation_set());
+        $validator->rule('in', 'foo', PingYo\TitleType::validation_set());
         $result = $validator->validate();
         $this->assertTrue($result);
     }
@@ -119,7 +119,7 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
     {
         $a = new PingYo\ApplicationDetails();
 
-        $a->title = PingYo\TitleTypes::Mr;
+        $a->title = PingYo\TitleType::Mr;
         $a->firstname = "John";
         $a->lastname = "Smith";
         $a->dateofbirth = "1994-09-01";
@@ -131,19 +131,19 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
         $a->employername = "Test Corp";
         $a->jobtitle = "Construction Worker";
         $a->employmentstarted = "2014-09-01";
-        $a->employerindustry = PingYo\EmployerIndustryTypes::ConstructionManufacturing;
-        $a->incomesource = PingYo\IncomeSourceTypes::EmployedFullTime;
-        $a->payfrequency = PingYo\PayFrequencyTypes::LastWorkingDayMonth;
+        $a->employerindustry = PingYo\EmployerIndustryType::ConstructionManufacturing;
+        $a->incomesource = PingYo\IncomeSourceType::EmployedFullTime;
+        $a->payfrequency = PingYo\PayFrequencyType::LastWorkingDayMonth;
         $a->payamount = 100;
-        $a->incomepaymenttype = PingYo\IncomePaymentTypes::RegionalDirectDeposit;
+        $a->incomepaymenttype = PingYo\IncomePaymentType::RegionalDirectDeposit;
         $a->nextpaydate = "2016-01-28";
         $a->followingpaydate = "2016-02-05";
         $a->loanamount = 10000;
         $a->nationalidentitynumber = null;
-        $a->nationalidentitynumbertype = PingYo\NationalIdentityNumberTypes::NationalInsurance;
+        $a->nationalidentitynumbertype = PingYo\NationalIdentityNumberType::NationalInsurance;
         $a->consenttocreditsearch = true;
         $a->consenttomarketingemails = true;
-        $a->residentialstatus = PingYo\ResidentialStatusTypes::HomeOwner;
+        $a->residentialstatus = PingYo\ResidentialStatusType::HomeOwner;
 
         $a->housenumber = "122";
         $a->housename = null;
@@ -155,7 +155,7 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
         $a->addresspostcode = "BT602EW";
 
         $a->bankaccountnumber = "12345678";
-        $a->bankcardtype = PingYo\BankCardTypes::VisaDebit;
+        $a->bankcardtype = PingYo\BankCardType::VisaDebit;
         $a->bankroutingnumber = "123456";
         $a->monthlymortgagerent = 600;
         $a->monthlycreditcommitments = 100;
@@ -218,7 +218,7 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
 
         $a = new PingYo\ApplicationDetails();
 
-        $a->title = PingYo\TitleTypes::Mr;
+        $a->title = PingYo\TitleType::Mr;
         $a->firstname = "John";
         $a->lastname = "Smith";
         $a->dateofbirth = "2005-09-01";
@@ -230,19 +230,19 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
         $a->employername = "Test Corp";
         $a->jobtitle = "Construction Worker";
         $a->employmentstarted = "2014-09-01";
-        $a->employerindustry = PingYo\EmployerIndustryTypes::ConstructionManufacturing;
-        $a->incomesource = PingYo\IncomeSourceTypes::EmployedFullTime;
-        $a->payfrequency = PingYo\PayFrequencyTypes::LastWorkingDayMonth;
+        $a->employerindustry = PingYo\EmployerIndustryType::ConstructionManufacturing;
+        $a->incomesource = PingYo\IncomeSourceType::EmployedFullTime;
+        $a->payfrequency = PingYo\PayFrequencyType::LastWorkingDayMonth;
         $a->payamount = 100;
-        $a->incomepaymenttype = PingYo\IncomePaymentTypes::RegionalDirectDeposit;
+        $a->incomepaymenttype = PingYo\IncomePaymentType::RegionalDirectDeposit;
         $a->nextpaydate = "2016-01-31";
         $a->followingpaydate = "2016-02-05";
         $a->loanamount = 10000;
         $a->nationalidentitynumber = null;
-        $a->nationalidentitynumbertype = PingYo\NationalIdentityNumberTypes::NationalInsurance;
+        $a->nationalidentitynumbertype = PingYo\NationalIdentityNumberType::NationalInsurance;
         $a->consenttocreditsearch = true;
         $a->consenttomarketingemails = true;
-        $a->residentialstatus = PingYo\ResidentialStatusTypes::HomeOwner;
+        $a->residentialstatus = PingYo\ResidentialStatusType::HomeOwner;
 
         $a->housenumber = "122";
         $a->housename = null;
@@ -254,7 +254,7 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
         $a->addresspostcode = "BT602EW";
 
         $a->bankaccountnumber = "12345678";
-        $a->bankcardtype = PingYo\BankCardTypes::VisaDebit;
+        $a->bankcardtype = PingYo\BankCardType::VisaDebit;
         $a->bankroutingnumber = "123456";
         $a->monthlymortgagerent = 600;
         $a->monthlycreditcommitments = 100;
@@ -286,7 +286,7 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
 
         $a = new PingYo\ApplicationDetails();
 
-        $a->title = PingYo\TitleTypes::Mr;
+        $a->title = PingYo\TitleType::Mr;
         $a->firstname = "John";
         $a->lastname = "Smith";
         $a->dateofbirth = "1994-09-01";
@@ -298,19 +298,19 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
         $a->employername = "Test Corp";
         $a->jobtitle = "Construction Worker";
         $a->employmentstarted = "2014-09-01";
-        $a->employerindustry = PingYo\EmployerIndustryTypes::ConstructionManufacturing;
-        $a->incomesource = PingYo\IncomeSourceTypes::EmployedFullTime;
-        $a->payfrequency = PingYo\PayFrequencyTypes::LastWorkingDayMonth;
+        $a->employerindustry = PingYo\EmployerIndustryType::ConstructionManufacturing;
+        $a->incomesource = PingYo\IncomeSourceType::EmployedFullTime;
+        $a->payfrequency = PingYo\PayFrequencyType::LastWorkingDayMonth;
         $a->payamount = 100;
-        $a->incomepaymenttype = PingYo\IncomePaymentTypes::RegionalDirectDeposit;
+        $a->incomepaymenttype = PingYo\IncomePaymentType::RegionalDirectDeposit;
         $a->nextpaydate = "2016-01-31";
         $a->followingpaydate = "2016-02-05";
         $a->loanamount = 10000;
         $a->nationalidentitynumber = null;
-        $a->nationalidentitynumbertype = PingYo\NationalIdentityNumberTypes::NationalInsurance;
+        $a->nationalidentitynumbertype = PingYo\NationalIdentityNumberType::NationalInsurance;
         $a->consenttocreditsearch = true;
         $a->consenttomarketingemails = true;
-        $a->residentialstatus = PingYo\ResidentialStatusTypes::HomeOwner;
+        $a->residentialstatus = PingYo\ResidentialStatusType::HomeOwner;
 
         $a->housenumber = "122";
         $a->housename = null;
@@ -322,7 +322,7 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
         $a->addresspostcode = "BT602EW";
 
         $a->bankaccountnumber = "12345678";
-        $a->bankcardtype = PingYo\BankCardTypes::VisaDebit;
+        $a->bankcardtype = PingYo\BankCardType::VisaDebit;
         $a->bankroutingnumber = "123456";
         $a->monthlymortgagerent = 600;
         $a->monthlycreditcommitments = 100;
@@ -358,7 +358,7 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
 
         $a = new PingYo\ApplicationDetails();
 
-        $a->title = PingYo\TitleTypes::Mr;
+        $a->title = PingYo\TitleType::Mr;
         $a->firstname = "John";
         $a->lastname = "Smith";
         $a->dateofbirth = "1994-09-01";
@@ -371,19 +371,19 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
         $a->jobtitle = "Construction Worker";
         $a->employmentstarted = "2014-09-01";
 
-        $a->employerindustry = PingYo\EmployerIndustryTypes::ConstructionManufacturing;
-        $a->incomesource = PingYo\IncomeSourceTypes::EmployedFullTime;
-        $a->payfrequency = PingYo\PayFrequencyTypes::LastWorkingDayMonth;
+        $a->employerindustry = PingYo\EmployerIndustryType::ConstructionManufacturing;
+        $a->incomesource = PingYo\IncomeSourceType::EmployedFullTime;
+        $a->payfrequency = PingYo\PayFrequencyType::LastWorkingDayMonth;
         $a->payamount = 100;
-        $a->incomepaymenttype = PingYo\IncomePaymentTypes::RegionalDirectDeposit;
+        $a->incomepaymenttype = PingYo\IncomePaymentType::RegionalDirectDeposit;
         $a->nextpaydate = "2016-01-31";
         $a->followingpaydate = "2016-02-05";
         $a->loanamount = 10000;
         $a->nationalidentitynumber = null;
-        $a->nationalidentitynumbertype = PingYo\NationalIdentityNumberTypes::NationalInsurance;
+        $a->nationalidentitynumbertype = PingYo\NationalIdentityNumberType::NationalInsurance;
         $a->consenttocreditsearch = true;
         $a->consenttomarketingemails = true;
-        $a->residentialstatus = PingYo\ResidentialStatusTypes::HomeOwner;
+        $a->residentialstatus = PingYo\ResidentialStatusType::HomeOwner;
 
         $a->housenumber = "1";
         $a->housename = "";
@@ -396,7 +396,7 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
 
 
         $a->bankaccountnumber = "12345678";
-        $a->bankcardtype = PingYo\BankCardTypes::MasterCard;
+        $a->bankcardtype = PingYo\BankCardType::MasterCard;
         $a->bankroutingnumber = "123456";
         $a->monthlymortgagerent = 600;
         $a->monthlycreditcommitments = 100;
@@ -433,7 +433,7 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
 
         $a = new PingYo\ApplicationDetails();
 
-        $a->title = PingYo\TitleTypes::Mr;
+        $a->title = PingYo\TitleType::Mr;
         $a->firstname = "John";
         $a->lastname = "Smith";
         $a->dateofbirth = "1994-09-01";
@@ -445,19 +445,19 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
         $a->employername = "Test Corp";
         $a->jobtitle = "Construction Worker";
         $a->employmentstarted = "2014-09-01";
-        $a->employerindustry = PingYo\EmployerIndustryTypes::ConstructionManufacturing;
-        $a->incomesource = PingYo\IncomeSourceTypes::EmployedFullTime;
-        $a->payfrequency = PingYo\PayFrequencyTypes::LastWorkingDayMonth;
+        $a->employerindustry = PingYo\EmployerIndustryType::ConstructionManufacturing;
+        $a->incomesource = PingYo\IncomeSourceType::EmployedFullTime;
+        $a->payfrequency = PingYo\PayFrequencyType::LastWorkingDayMonth;
         $a->payamount = 100;
-        $a->incomepaymenttype = PingYo\IncomePaymentTypes::RegionalDirectDeposit;
+        $a->incomepaymenttype = PingYo\IncomePaymentType::RegionalDirectDeposit;
         $a->nextpaydate = "2016-01-31";
         $a->followingpaydate = "2016-02-05";
         $a->loanamount = 10000;
         $a->nationalidentitynumber = null;
-        $a->nationalidentitynumbertype = PingYo\NationalIdentityNumberTypes::NationalInsurance;
+        $a->nationalidentitynumbertype = PingYo\NationalIdentityNumberType::NationalInsurance;
         $a->consenttocreditsearch = true;
         $a->consenttomarketingemails = true;
-        $a->residentialstatus = PingYo\ResidentialStatusTypes::HomeOwner;
+        $a->residentialstatus = PingYo\ResidentialStatusType::HomeOwner;
 
         $a->housenumber = "122";
         $a->housename = null;
@@ -469,7 +469,7 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
         $a->addresspostcode = "BT602EW";
 
         $a->bankaccountnumber = "12345678";
-        $a->bankcardtype = PingYo\BankCardTypes::VisaDebit;
+        $a->bankcardtype = PingYo\BankCardType::VisaDebit;
         $a->bankroutingnumber = "123456";
         $a->monthlymortgagerent = 600;
         $a->monthlycreditcommitments = 100;
@@ -516,7 +516,7 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
 
         $a = new PingYo\ApplicationDetails();
 
-        $a->title = PingYo\TitleTypes::Mr;
+        $a->title = PingYo\TitleType::Mr;
         $a->firstname = "John";
         $a->lastname = "Smith";
         $a->dateofbirth = "1994-09-01";
@@ -528,19 +528,19 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
         $a->employername = "Test Corp";
         $a->jobtitle = "Construction Worker";
         $a->employmentstarted = "2014-09-01";
-        $a->employerindustry = PingYo\EmployerIndustryTypes::ConstructionManufacturing;
-        $a->incomesource = PingYo\IncomeSourceTypes::EmployedFullTime;
-        $a->payfrequency = PingYo\PayFrequencyTypes::LastWorkingDayMonth;
+        $a->employerindustry = PingYo\EmployerIndustryType::ConstructionManufacturing;
+        $a->incomesource = PingYo\IncomeSourceType::EmployedFullTime;
+        $a->payfrequency = PingYo\PayFrequencyType::LastWorkingDayMonth;
         $a->payamount = 100;
-        $a->incomepaymenttype = PingYo\IncomePaymentTypes::RegionalDirectDeposit;
+        $a->incomepaymenttype = PingYo\IncomePaymentType::RegionalDirectDeposit;
         $a->nextpaydate = "2016-01-31";
         $a->followingpaydate = "2016-02-05";
         $a->loanamount = 500;
         $a->nationalidentitynumber = "";
-        $a->nationalidentitynumbertype = PingYo\NationalIdentityNumberTypes::NationalInsurance;
+        $a->nationalidentitynumbertype = PingYo\NationalIdentityNumberType::NationalInsurance;
         $a->consenttocreditsearch = true;
         $a->consenttomarketingemails = true;
-        $a->residentialstatus = PingYo\ResidentialStatusTypes::HomeOwner;
+        $a->residentialstatus = PingYo\ResidentialStatusType::HomeOwner;
 
         $a->housenumber = "1";
         $a->housename = "";
@@ -552,7 +552,7 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
         $a->addresspostcode = "BT602EW";
 
         $a->bankaccountnumber = "12345678";
-        $a->bankcardtype = PingYo\BankCardTypes::MasterCard;
+        $a->bankcardtype = PingYo\BankCardType::MasterCard;
         $a->bankroutingnumber = "123456";
         $a->monthlymortgagerent = 600;
         $a->monthlycreditcommitments = 100;
@@ -603,7 +603,7 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
 
         $a = new PingYo\ApplicationDetails();
 
-        $a->title = PingYo\TitleTypes::Mr;
+        $a->title = PingYo\TitleType::Mr;
         $a->firstname = "John";
         $a->lastname = "Smith";
         $a->dateofbirth = "1994-09-01";
@@ -615,19 +615,19 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
         $a->employername = "Test Corp";
         $a->jobtitle = "Construction Worker";
         $a->employmentstarted = "2014-09-01";
-        $a->employerindustry = PingYo\EmployerIndustryTypes::ConstructionManufacturing;
-        $a->incomesource = PingYo\IncomeSourceTypes::EmployedFullTime;
-        $a->payfrequency = PingYo\PayFrequencyTypes::LastWorkingDayMonth;
+        $a->employerindustry = PingYo\EmployerIndustryType::ConstructionManufacturing;
+        $a->incomesource = PingYo\IncomeSourceType::EmployedFullTime;
+        $a->payfrequency = PingYo\PayFrequencyType::LastWorkingDayMonth;
         $a->payamount = 100;
-        $a->incomepaymenttype = PingYo\IncomePaymentTypes::RegionalDirectDeposit;
+        $a->incomepaymenttype = PingYo\IncomePaymentType::RegionalDirectDeposit;
         $a->nextpaydate = "2016-01-31";
         $a->followingpaydate = "2016-02-05";
         $a->loanamount = 10000;
         $a->nationalidentitynumber = null;
-        $a->nationalidentitynumbertype = PingYo\NationalIdentityNumberTypes::NationalInsurance;
+        $a->nationalidentitynumbertype = PingYo\NationalIdentityNumberType::NationalInsurance;
         $a->consenttocreditsearch = true;
         $a->consenttomarketingemails = true;
-        $a->residentialstatus = PingYo\ResidentialStatusTypes::HomeOwner;
+        $a->residentialstatus = PingYo\ResidentialStatusType::HomeOwner;
 
         $a->housenumber = "122";
         $a->housename = null;
@@ -639,7 +639,7 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
         $a->addresspostcode = "BT602EW";
 
         $a->bankaccountnumber = "12345678";
-        $a->bankcardtype = PingYo\BankCardTypes::VisaDebit;
+        $a->bankcardtype = PingYo\BankCardType::VisaDebit;
         $a->bankroutingnumber = "123456";
         $a->monthlymortgagerent = 600;
         $a->monthlycreditcommitments = 100;
@@ -714,7 +714,7 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
 
         $a = new PingYo\ApplicationDetails();
 
-        $a->title = PingYo\TitleTypes::Mr;
+        $a->title = PingYo\TitleType::Mr;
         $a->firstname = "John";
         $a->lastname = "Smith";
         $a->dateofbirth = "1994-09-01";
@@ -726,19 +726,19 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
         $a->employername = "Test Corp";
         $a->jobtitle = "Construction Worker";
         $a->employmentstarted = "2014-09-01";
-        $a->employerindustry = PingYo\EmployerIndustryTypes::ConstructionManufacturing;
-        $a->incomesource = PingYo\IncomeSourceTypes::EmployedFullTime;
-        $a->payfrequency = PingYo\PayFrequencyTypes::LastWorkingDayMonth;
+        $a->employerindustry = PingYo\EmployerIndustryType::ConstructionManufacturing;
+        $a->incomesource = PingYo\IncomeSourceType::EmployedFullTime;
+        $a->payfrequency = PingYo\PayFrequencyType::LastWorkingDayMonth;
         $a->payamount = 100;
-        $a->incomepaymenttype = PingYo\IncomePaymentTypes::RegionalDirectDeposit;
+        $a->incomepaymenttype = PingYo\IncomePaymentType::RegionalDirectDeposit;
         $a->nextpaydate = "2016-01-31";
         $a->followingpaydate = "2016-02-05";
         $a->loanamount = 10000;
         $a->nationalidentitynumber = null;
-        $a->nationalidentitynumbertype = PingYo\NationalIdentityNumberTypes::NationalInsurance;
+        $a->nationalidentitynumbertype = PingYo\NationalIdentityNumberType::NationalInsurance;
         $a->consenttocreditsearch = true;
         $a->consenttomarketingemails = true;
-        $a->residentialstatus = PingYo\ResidentialStatusTypes::HomeOwner;
+        $a->residentialstatus = PingYo\ResidentialStatusType::HomeOwner;
 
         $a->housenumber = "122";
         $a->housename = null;
@@ -750,7 +750,7 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
         $a->addresspostcode = "BT602EW";
 
         $a->bankaccountnumber = "12345678";
-        $a->bankcardtype = PingYo\BankCardTypes::VisaDebit;
+        $a->bankcardtype = PingYo\BankCardType::VisaDebit;
         $a->bankroutingnumber = "123456";
         $a->monthlymortgagerent = 600;
         $a->monthlycreditcommitments = 100;

@@ -2,7 +2,7 @@
 
 namespace PingYo;
 
-class LoanProceedUseTypes
+class LoanProceedUseType
 {
 
 

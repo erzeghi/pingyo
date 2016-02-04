@@ -217,7 +217,7 @@ class ApplicationDetails
             ],
             'required_if' => [
                 // [['nationalidentitynumber'], ['bankcardtype', ['None', 'Unknown']]],
-                [['combinedmonthlyhouseholdincome'], ['maritalstatus', [MaritalStatusTypes::Married]]]
+                [['combinedmonthlyhouseholdincome'], ['maritalstatus', [MaritalStatusType::Married]]]
             ],
             'email' => [
                 [['email']]
@@ -248,17 +248,17 @@ class ApplicationDetails
                 [['dateofbirth'], $this->getValidDOB()]
             ],
             'in' => [
-                [['title'], TitleTypes::validation_set()],
-                [['employerindustry'], EmployerIndustryTypes::validation_set()],
-                [['incomesource'], IncomeSourceTypes::validation_set()],
-                [['payfrequency'], PayFrequencyTypes::validation_set()],
-                [['incomepaymenttype'], IncomePaymentTypes::validation_set()],
-                [['nationalidentitynumbertype'], NationalIdentityNumberTypes::validation_set()],
-                [['residentialstatus'], ResidentialStatusTypes::validation_set()],
+                [['title'], TitleType::validation_set()],
+                [['employerindustry'], EmployerIndustryType::validation_set()],
+                [['incomesource'], IncomeSourceType::validation_set()],
+                [['payfrequency'], PayFrequencyType::validation_set()],
+                [['incomepaymenttype'], IncomePaymentType::validation_set()],
+                [['nationalidentitynumbertype'], NationalIdentityNumberType::validation_set()],
+                [['residentialstatus'], ResidentialStatusType::validation_set()],
                 [['consenttocreditsearch', 'consenttomarketingemails', 'confirmedbyapplicant','usesonlinebanking'], $this->boolean_variants],
-                [['bankcardtype'], BankCardTypes::validation_set()],
-                [['maritalstatus'], MaritalStatusTypes::validation_set()],
-                [['loanproceeduse'], LoanProceedUseTypes::validation_set()],
+                [['bankcardtype'], BankCardType::validation_set()],
+                [['maritalstatus'], MaritalStatusType::validation_set()],
+                [['loanproceeduse'], LoanProceedUseType::validation_set()],
             ],
             'integer' => [
                 [['payamount','loanamount','term','numberofdependents']]

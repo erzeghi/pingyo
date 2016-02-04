@@ -2,7 +2,7 @@
 
 namespace PingYo;
 
-class ResidentialStatusTypes
+class ResidentialStatusType
 {
 
     const HomeOwner = 1;

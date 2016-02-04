@@ -2,7 +2,7 @@
 
 namespace PingYo;
 
-class MaritalStatusTypes
+class MaritalStatusType
 {
 
 

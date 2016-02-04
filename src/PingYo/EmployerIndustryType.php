@@ -2,7 +2,7 @@
 
 namespace PingYo;
 
-class EmployerIndustryTypes
+class EmployerIndustryType
 {
 
     const ConstructionManufacturing = 1;

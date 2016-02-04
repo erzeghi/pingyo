@@ -2,7 +2,7 @@
 
 namespace PingYo;
 
-class IncomePaymentTypes
+class IncomePaymentType
 {
 
     // const None = 1;
