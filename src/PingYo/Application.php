@@ -130,9 +130,9 @@ class Application
                 'sourcedetails' => $this->sourcedetails
             ));
         $validator->rules($this->validation_rules);
-        if ($validator->validate()) {
+        if ($validator->validate()===true) {
             if ($full_validation) {
-                if (($this->applicationdetails->validate()) && ($this->sourcedetails->validate())) {
+                if (($this->applicationdetails->validate()===true) && ($this->sourcedetails->validate()===true)) {
                     if (!is_null($this->logger)) {
                         $this->logger->info("Application validation passed");
                     }
