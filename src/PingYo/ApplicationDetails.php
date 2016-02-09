@@ -255,10 +255,13 @@ class ApplicationDetails
                 [['incomepaymenttype'], IncomePaymentType::validation_set()],
                 [['nationalidentitynumbertype'], NationalIdentityNumberType::validation_set()],
                 [['residentialstatus'], ResidentialStatusType::validation_set()],
-                [['consenttocreditsearch', 'consenttomarketingemails', 'confirmedbyapplicant','usesonlinebanking'], $this->boolean_variants],
+                [['consenttomarketingemails', 'confirmedbyapplicant','usesonlinebanking'], $this->boolean_variants],
                 [['bankcardtype'], BankCardType::validation_set()],
                 [['maritalstatus'], MaritalStatusType::validation_set()],
                 [['loanproceeduse'], LoanProceedUseType::validation_set()],
+            ],
+            'accepted'=> [
+                [['consenttocreditsearch']],
             ],
             'integer' => [
                 [['payamount','loanamount','term','numberofdependents']]
