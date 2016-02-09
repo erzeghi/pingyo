@@ -25,12 +25,12 @@ class Application
         'in' => [
             [['testonly'], [false, true]]
         ],
-        'min' => [
-            [['timeout'], 45]
-        ],
-        'max' => [
-            [['timeout'], 120]
-        ],
+        // 'min' => [
+        //     [['timeout'], 45]
+        // ],
+        // 'max' => [
+        //     [['timeout'], 120]
+        // ],
         'instanceOf' => [
             [['applicationdetails'], 'PingYo\ApplicationDetails'],
             [['sourcedetails'], 'PingYo\SourceDetails'],
@@ -93,10 +93,12 @@ class Application
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30); 
+            curl_setopt($ch, CURLOPT_TIMEOUT, 60); 
             curl_setopt($ch, CURLOPT_HTTPHEADER, array(
                 'Accept: application/json, text/javascript, *.*',
                 'Content-type: application/json; charset=utf-8'
+                // 'App-Test-Response-Type: LenderMatchFound'
             ));
 
             $server_output = curl_exec($ch);

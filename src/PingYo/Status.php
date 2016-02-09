@@ -5,6 +5,7 @@ class Status
 {
 
     public $httpcode = "";
+
     public $errors = "";
     public $correlationid = "";
     public $message = "";
@@ -75,6 +76,7 @@ class Status
         }
 
         $r = json_decode($server_output);
+        
         if (isset($r->PercentageComplete)) {
             $this->percentagecomplete = $r->PercentageComplete;
         }
@@ -94,7 +96,9 @@ class Status
         $info = curl_getinfo($ch);
         curl_close($ch);
 
-        return $r;
+        $this->httpcode = $info['http_code'];
+
+        return $this;
     }
 
 }
