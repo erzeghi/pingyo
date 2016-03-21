@@ -99,6 +99,7 @@ class Application
             curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30); 
             curl_setopt($ch, CURLOPT_TIMEOUT, 60); 
             curl_setopt($ch, CURLOPT_USERAGENT, $this->useragent); 
+            curl_setopt($ch, CURLINFO_HEADER_OUT, true);
             curl_setopt($ch, CURLOPT_HTTPHEADER, array(
                 'Accept: application/json, text/javascript, *.*',
                 'Content-type: application/json; charset=utf-8'
@@ -109,6 +110,7 @@ class Application
             $info = curl_getinfo($ch);
 
             if (!is_null($this->logger)) {
+                $this->logger->info('API request', array('request'=>curl_getinfo($ch,CURLINFO_HEADER_OUT)));
                 $this->logger->info("got response with code " . $info['http_code'] . ': ' . $server_output);
             }
 
