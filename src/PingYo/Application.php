@@ -87,7 +87,7 @@ class Application
             $request = $this->toJson();
 
             if (!is_null($this->logger)) {
-                $this->logger->info("request sent: " . $request);
+                $this->logger->info("request sent: ", array("data"=>$request));
             }
 
             $ch = curl_init();
