@@ -232,9 +232,6 @@ class ApplicationDetails
                 [['firstname', 'lastname'], 2],
                 [['employername'], 1],
             ],
-            'alpha' => [
-                [['firstname', 'lastname']]
-            ],
             'date' => [
                 [['dateofbirth', 'employmentstarted', 'nextpaydate', 'followingpaydate', 'addressmovein']]
             ],
