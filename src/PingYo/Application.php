@@ -10,6 +10,8 @@ class Application
     public $timeout;
     public $testonly;
 
+    public $useragent;
+
     private $applicationdetails;
     private $sourcedetails;
     private $connection_status = false;
@@ -79,6 +81,7 @@ class Application
         if (!is_null($this->logger)) {
             $this->logger->debug("Application::send() called");
         }
+        if (is_null($this->useragent)) $this->useragent="";
         $r = $this->validate();
         if ($r === true) {
             $request = $this->toJson();
@@ -95,6 +98,7 @@ class Application
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30); 
             curl_setopt($ch, CURLOPT_TIMEOUT, 60); 
+            curl_setopt($ch, CURLOPT_USERAGENT, $this->useragent); 
             curl_setopt($ch, CURLOPT_HTTPHEADER, array(
                 'Accept: application/json, text/javascript, *.*',
                 'Content-type: application/json; charset=utf-8'
