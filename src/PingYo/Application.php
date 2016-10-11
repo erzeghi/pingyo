@@ -3,6 +3,7 @@ namespace PingYo;
 
 class Application
 {
+    private $region;
 
     public $affiliateid;
     public $subaffiliate;
@@ -16,6 +17,8 @@ class Application
     private $sourcedetails;
     private $connection_status = false;
     private $logger = null;
+
+
 
     private $validation_rules = [
         'required' => [
@@ -34,10 +37,15 @@ class Application
         //     [['timeout'], 120]
         // ],
         'instanceOf' => [
-            [['applicationdetails'], 'PingYo\ApplicationDetails'],
+            // [['applicationdetails'], 'PingYo\ApplicationDetails'],
             [['sourcedetails'], 'PingYo\SourceDetails'],
         ]
     ];
+
+    public function __construct($region = "UK") {
+        if (!in_array($region,["USA","UK"])) $region="UK";
+        $this->region = $region;
+    }
 
     public function attachLogger(\Psr\Log\LoggerInterface $logger)
     {
@@ -46,8 +54,32 @@ class Application
 
     public function setApplicationDetails(ApplicationDetails $applicationdetails)
     {
+        if ($this->region != "UK") {
+            if (!is_null($this->logger)) {
+                $this->logger->warning("Application::setApplicationDetails() called but other region than UK is set.");
+            }
+            return false;
+        }
         if (!is_null($this->logger)) {
             $this->logger->debug("Application::setApplicationDetails() called with applicationdetails=" . var_export($applicationdetails,
+                    true));
+        }
+        $this->applicationdetails = $applicationdetails;
+        if (!is_null($this->logger)) {
+            $applicationdetails->attachLogger($this->logger);
+        }
+    }
+
+    public function setApplicationDetailsUSA(ApplicationDetailsUSA $applicationdetails)
+    {
+        if ($this->region != "USA") {
+            if (!is_null($this->logger)) {
+                $this->logger->warning("Application::setApplicationDetailsUSA() called but other region is set.");
+            }
+            return false;
+        }
+        if (!is_null($this->logger)) {
+            $this->logger->debug("Application::setApplicationDetailsUSA() called with applicationdetails=" . var_export($applicationdetails,
                     true));
         }
         $this->applicationdetails = $applicationdetails;
