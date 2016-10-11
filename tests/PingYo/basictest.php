@@ -616,6 +616,93 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
     }
 
 
+    public function testUSAApplicationSendPassSolo()
+    {
+
+        $c = new PingYo\Application('USA');
+        $c->affiliateid = 'USA_TEST';
+        $c->timeout = 120;
+        $c->testonly = true;
+
+        if (file_exists("pingyo-test1.log")) {
+            unlink("pingyo-test1.log");
+        }
+
+        $logger = new \Monolog\Logger("PingYo");
+        $logger->pushHandler(new \Monolog\Handler\StreamHandler("pingyo-test1.log"));
+        $c->attachLogger($logger);
+
+        $a = new PingYo\ApplicationDetailsUSA();
+
+        $a->title = PingYo\TitleType::Mr;
+        $a->firstname = "John";
+        $a->lastname = "Smith";
+        $a->dateofbirth = "1994-09-01";
+        $a->email = "johnsmith@domain.com";
+        $a->homephonenumber = "1234567890";
+        $a->mobilephonenumber = "1234567890";
+        $a->workphonenumber = "1234567890";
+
+        $a->employername = "Test Corp";
+        $a->jobtitle = "Construction Worker";
+        $a->employmentstarted = "2014-09-01";
+        $a->incomesource = PingYo\IncomeSourceType::EmployedFullTime;
+        $a->payfrequency = PingYo\PayFrequencyType::LastWorkingDayMonth;
+        $a->payamount = 100;
+        $a->incomepaymenttype = PingYo\IncomePaymentType::RegionalDirectDeposit;
+        $a->nextpaydate = "2016-10-31";
+        $a->followingpaydate = "2016-11-15";
+        $a->loanamount = 10000;
+        $a->nationalidentitynumber = "123-23-1232";
+        $a->nationalidentitynumbertype = PingYo\NationalIdentityNumberTypeUSA::SocialSecurity;
+        $a->consenttocreditsearch = true;
+        $a->consenttomarketingemails = true;
+        $a->residentialstatus = PingYo\ResidentialStatusType::HomeOwner;
+
+        $a->housenumber = "122";
+        $a->housename = null;
+        $a->addressstreet1 = "Test Street";
+        $a->addresscity = "Test City";
+        $a->addresscountrycode = "GB";
+        $a->addressmovein = "2014-08-01";
+        $a->addresspostcode = "23433";
+
+        $a->bankaccountnumber = "12345678";
+        $a->bankcardtype = PingYo\BankCardTypeUSA::VisaDebit;
+        $a->bankroutingnumber = "344343433";
+        $a->minimumcommissionamount = 0;
+        $a->maximumcommissionamount = 0;
+        $a->applicationextensions = ["x" => "hello", "y" => "world"];
+
+        $a->term = 1;
+
+        $a->combinedmonthlyhouseholdincome = 3000;
+
+        $a->militaryservice = PingYo\MilitaryServiceType::None;
+        $a->addressstate = "AL";
+        $a->bankname = "LJKJKLJl";
+        $a->bankaccountopened = "2014-12-12";
+        $a->bankaccounttype = PingYo\BankAccountType::Checking;
+        $a->driverslicensenumber = "fadsfdsf";
+        $a->driverslicensestate = "AL";
+
+
+        $c->setApplicationDetailsUSA($a);
+
+        $b = new PingYo\SourceDetails();
+        $b->address = '127.0.0.1';
+        $b->clientuseragent = 'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0;)';
+        $b->creationurl = 'http://www.url.com';
+        $b->referringurl = 'http://some-cool-affiliate-site.org';
+
+        $c->setSourceDetails($b);
+
+        $t = $c->send();
+
+        $this->assertTrue($t->httpcode == 202);
+    }
+
+
     public function testApplicationSendPassSolo()
     {
 

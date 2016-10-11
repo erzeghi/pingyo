@@ -373,7 +373,7 @@ class ApplicationDetailsUSA
                 'MilitaryService' => $this->militaryservice,
                 'AddressState' => $this->addressstate,
                 'BankName' => $this->bankname,
-                'BankAccountOpened' => $this->bankaccountopened,
+                'BankAccountOpened' => $this->strDateToJsonDate($this->bankaccountopened),
                 'BankAccountType' => $this->bankaccounttype,
                 'DriversLicenseNumber' => $this->driverslicensenumber,
                 'DriversLicenseState' => $this->driverslicensestate
