@@ -217,11 +217,11 @@ class ApplicationDetailsUSA
             ],
             'length' => [
                 [['mobilephonenumber','homephonenumber','workphonenumber'],10],
-                [['addresspostcode'],5]
+                // [['addresspostcode'],5]
             ],
-            // 'lengthBetween' => [
-                // [['homephonenumber','workphonenumber'],10,11]
-            // ],
+            'lengthBetween' => [
+                [['addresspostcode'],5,5]
+            ],
             'lengthMin' => [
                 [['firstname', 'lastname'], 2],
                 [['employername'], 1]
