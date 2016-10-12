@@ -434,7 +434,7 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
         $a->driverslicensestate = "AL";
 
 
-        $c->setApplicationDetailsUSA($a);
+        $c->setApplicationDetails($a);
 
         $b = new PingYo\SourceDetails();
         $b->address = '127.0.0.1';
@@ -687,7 +687,7 @@ class ApplicationTest extends PHPUnit_Framework_TestCase
         $a->driverslicensestate = "AL";
 
 
-        $c->setApplicationDetailsUSA($a);
+        $c->setApplicationDetails($a);
 
         $b = new PingYo\SourceDetails();
         $b->address = '127.0.0.1';

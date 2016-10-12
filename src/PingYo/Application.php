@@ -52,14 +52,8 @@ class Application
         $this->logger = $logger;
     }
 
-    public function setApplicationDetails(ApplicationDetails $applicationdetails)
+    public function setApplicationDetails($applicationdetails)
     {
-        if ($this->region != "UK") {
-            if (!is_null($this->logger)) {
-                $this->logger->warning("Application::setApplicationDetails() called but other region than UK is set.");
-            }
-            return false;
-        }
         if (!is_null($this->logger)) {
             $this->logger->debug("Application::setApplicationDetails() called with applicationdetails=" . var_export($applicationdetails,
                     true));
@@ -70,23 +64,6 @@ class Application
         }
     }
 
-    public function setApplicationDetailsUSA(ApplicationDetailsUSA $applicationdetails)
-    {
-        if ($this->region != "USA") {
-            if (!is_null($this->logger)) {
-                $this->logger->warning("Application::setApplicationDetailsUSA() called but other region is set.");
-            }
-            return false;
-        }
-        if (!is_null($this->logger)) {
-            $this->logger->debug("Application::setApplicationDetailsUSA() called with applicationdetails=" . var_export($applicationdetails,
-                    true));
-        }
-        $this->applicationdetails = $applicationdetails;
-        if (!is_null($this->logger)) {
-            $applicationdetails->attachLogger($this->logger);
-        }
-    }
 
     public function setSourceDetails(SourceDetails $sourcedetails)
     {
