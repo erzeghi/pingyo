@@ -27,6 +27,7 @@ class ApplicationDetails
     public $nationalidentitynumbertype;
     public $consenttocreditsearch;
     public $consenttomarketingemails;
+    public $consenttomarketingemails2;
     public $residentialstatus;
     public $housenumber;
     public $housename;
@@ -108,6 +109,7 @@ class ApplicationDetails
             'nationalidentitynumbertype' => $this->nationalidentitynumbertype,
             'consenttocreditsearch' => $this->consenttocreditsearch,
             'consenttomarketingemails' => $this->consenttomarketingemails,
+            'consenttomarketingemails2' => $this->consenttomarketingemails2,
             'residentialstatus' => $this->residentialstatus,
             'housenumber' => $this->housenumber,
             'housename' => $this->housename,
@@ -252,7 +254,7 @@ class ApplicationDetails
                 [['incomepaymenttype'], IncomePaymentType::validation_set()],
                 [['nationalidentitynumbertype'], NationalIdentityNumberType::validation_set()],
                 [['residentialstatus'], ResidentialStatusType::validation_set()],
-                [['consenttomarketingemails', 'confirmedbyapplicant','usesonlinebanking'], $this->boolean_variants],
+                [['consenttomarketingemails','consenttomarketingemails2', 'confirmedbyapplicant','usesonlinebanking'], $this->boolean_variants],
                 [['bankcardtype'], BankCardType::validation_set()],
                 [['maritalstatus'], MaritalStatusType::validation_set()],
                 [['loanproceeduse'], LoanProceedUseType::validation_set()],
@@ -390,6 +392,8 @@ class ApplicationDetails
                 'NumberOfDependents' => $this->numberofdependents,
                 'CombinedMonthlyHouseholdIncome' => $this->combinedmonthlyhouseholdincome
             );
+
+            if (isset($this->consenttomarketingemails2)) $returnArray['ConsentToMarketingEmails2'] = $this->consenttomarketingemails2;
             
             //nonrequired fields
             if (isset($this->jobtitle)) $returnArray['JobTitle'] = $this->jobtitle; 
